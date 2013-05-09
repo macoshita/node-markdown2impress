@@ -24,31 +24,77 @@
       <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
     </div>
 
-    <div id="impress"><div class="step" data-x="0" data-y="0">markdown2impress</div><div class="step" data-x="1200" data-y="0">What is markdown2impress?<strong>markdown2impress</strong> is script to convert <em>markdown</em> into presentation using <em>impress.js</em>.</div><div class="step" data-x="2400" data-y="0">How to use?
-<li>Write markdown.</li>
-<li><p>Run <strong>markdown2impress.pl</strong>, then generate 'js/impress.js', 'css/impress.css' and 'index.html'.</p>
+    <div id="impress"><div class="step" id="title" data-x="1200" data-y="0" data-z="1" data-scale="1" data-rotate="0"><h1>Big Wave Node</h1></div>
 
-<pre><code>% markdown2impress README.md
-</code></pre></li>
-</div><div class="step" data-x="0" data-y="800">Slide Dividing ruleEach slide is divided into sections.</div><div class="step" data-x="1200" data-y="800">'data-*' attribute rule'data-*' attribute for impress.js represent HTML comment.<br>This comment must be write in secion.<code>&lt;!-- data-x="2400" --&gt;
-&lt;!-- data-y="3000" --&gt;
-&lt;!-- data-z="-100" --&gt;
-&lt;!-- data-scale="10" --&gt;
-&lt;!-- data-rotate="90" --&gt;
-</code>markdown2impress assume and calculate default x,y, if you do not specify this.See <a href="http://bartaz.github.com/impress.js/">impress.js</a> manual for details.</div><div class="step" data-x="2400" data-y="800">Command line options
-<li><p><strong>--width=1200</strong></p>
+<!--
+id: title
+-->
 
-<p>Width of slide.</p></li>
-<li><p><strong>--height=800</strong></p>
+<div class="step" data-x="2400" data-y="0" data-z="1" data-scale="1" data-rotate="0"><h2>自己紹介</h2><ul>
+<li>山越崇裕と申します</li>
+<li>jig.jp という会社から来ました</li>
+<li>イカちゃんとかコッシーとか呼ばれてます</li>
+</ul></div>
 
-<p>Height of slide.</p></li>
-<li><p><strong>--column=5</strong></p>
 
-<p>Column of slide.</p></li>
-<li><p><strong>--outputdir=.</strong></p>
 
-<p>Output directory.</p></li>
-</div></div>
+<div class="step" data-x="3600" data-y="0" data-z="1" data-scale="1" data-rotate="0"><h2>普段の仕事</h2><ul>
+<li>hottoLINE, COPAIN といったチャットアプリの裏側作りました</li>
+<li>Pairin というアプリの HTML 部分を担当
+<ul><li>HTML のネイティブのハイブリッド</li></ul></li>
+</ul></div>
+
+
+
+<div class="step" data-rotate="180" data-scale="2" data-x="0" data-y="800" data-z="1"><h2>突然ですが</h2><p><strong>最近、JS やってなかったです</strong></p></div>
+
+<!--
+data-rotate: 180
+data-scale: 2
+-->
+
+
+
+<div class="step" data-x="1200" data-y="800" data-z="1" data-scale="1" data-rotate="0"><h2>言い訳</h2><ul>
+<li>１年くらいサーバしかやってなかった
+<ul><li>pairin が１年前</li></ul></li>
+<li>dailyjs とかブログで情報だけ追ってる
+<ul><li>最近やたら backbone 情報多いね、とか</li>
+<li>pairin は backbone だったり</li></ul></li>
+</ul></div>
+
+
+
+<div class="step" data-scale="1.5" data-x="2400" data-y="800" data-z="1" data-rotate="0"><h2>でも最近思う</h2><p><em>node ばっかじゃね？</em></p></div>
+
+<!--
+data-scale: 1.5
+-->
+
+
+
+<div class="step" data-x="3600" data-y="800" data-z="1" data-scale="1" data-rotate="0"><h2>おいかけて</h2><ul>
+<li>はやりのものを色々使って
+<ul><li>yeoman</li>
+<li>grunt</li>
+<li>bower</li></ul></li>
+</ul></div>
+
+
+
+<div class="step" data-x="1.5" data-y="1600" data-z="1" data-scale="1" data-rotate="0"><h2>おいかけて</h2><ul>
+<li>定番もいろいろ使って
+<ul><li>RequireJS</li>
+<li>knockout.js</li>
+<li>socket.io</li>
+<li>express</li></ul></li>
+</ul></div><div id="overview" class="step" data-x="1200" data-y="400" data-scale="4"></div>
+
+<!--
+data-x: 1.5
+-->
+
+</div>
 
     <script src="js/impress.js"></script>
     <script>impress().init();</script>

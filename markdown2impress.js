@@ -1,66 +1,117 @@
 'use strict';
 
+var argv = require('optimist')
+      .default({
+        w: 1200,
+        h: 800,
+        o: './output'
+      })
+      .alias('w', 'width')
+      .alias('h', 'height')
+      .alias('o', 'output')
+      .demand(1)
+      .argv;
+
 var fs = require('fs'),
+    YAML = require('yamljs'),
+    _ = require('underscore')._,
+    S = require('string'),
     cheerio = require('cheerio'),
     ghm = require('github-flavored-markdown');
-
-var opts = {
-  width: 1200,
-  height: 800,
-  maxColumn: 5,
-  outputdir: __dirname + '/output'
-}
 
 var defs = {
   template: __dirname + '/impress.js/index.html'
 }
 
-var markdown = fs.readFileSync(process.argv[2], 'utf8');
+var markdown = fs.readFileSync(argv._[0], 'utf8');
 
 var md2html = ghm.parse(markdown);
 
-var $ = cheerio.load(md2html);
+var $ = cheerio.load(fs.readFileSync(defs.template, 'utf8'));
 
-var html = [];
+$('#impress').html(md2html);
 
-$('h1,h2').each(function(i, elem) {
-  var $e = $(this),
-      name = $e[0].name;
+var x = 0, y = 0, maxX = 0, maxY = 0;
 
-  html.push('<div class="step">');
+function getOption(e) {
+  var opt = {},
+      data;
 
-  if (name === 'h1') {
-    html.push($e.html(), '</div>');
-
-  } else {
-    do {
-      html.push($e.html());
-      $e = $e.next();
-    } while ($e && $e.length > 0 && !/h1|2/i.test($e[0].name));
-
-    html.push('</div>');
+  while ((e = e.next) && e.type !== 'tag') {
+    if (e.type === 'comment') {
+      data = S(e.data).trim();
+      opt = YAML.parse(data.s);
+      break;
+    }
   }
-});
 
-$ = cheerio.load(fs.readFileSync(defs.template, 'utf8'));
+  if (_.isString(opt['data-x'])) {
+    opt['data-x']
+  }
 
-$('#impress').html(html.join(''));
-
-var x = 0, y = 0;
-
-$('.step').each(function(i, elem) {
-  var $e = $(this);
-
-  $e.attr('data-x', x);
-  $e.attr('data-y', y);
-
-  x += opts.width;
-  if (x == opts.width * 3) {
+  x += argv.w;
+  if (x >= argv.w * 4) {
     x = 0;
-    y += opts.height;
+    y += argv.h;
   }
+
+  if (maxX < x) {
+    maxX = x;
+  }
+
+  if (maxY < y) {
+    maxY = y;
+  }
+
+  opt = _.defaults(opt, {
+    'data-x': x,
+    'data-y': y,
+    'data-z': 1,
+    'data-scale': 1,
+    'data-rotate': 0
+  });
+
+  return opt;
+}
+
+//$('h1,h2').each(function(i, elem) {
+//  var e = $(this),
+//      name,
+//      $html = cheerio.load('<div class="step"></div>'),
+//      div = $html('div');
+//
+//  div.attr(getOption(elem));
+//
+//  do {
+//    div.append($.html(e));
+//    e = e.next();
+//  } while (e && e.length > 0 && !/h[1-6]/i.test(e[0].name));
+//
+//  html.push($html.html());
+//});
+
+$('#impress').find('h1,h2').each(function(i, elem) {
+  var e = $(this),
+      name,
+      tmp,
+      div = e.before('<div class="step"></div>').prev();
+
+  div.attr(getOption(elem));
+
+  do {
+    div.append($.html(e));
+    tmp = e;
+    e = e.next();
+    tmp.remove();
+  } while (e && e.length > 0 && !/h[1-6]/i.test(e[0].name));
 });
 
-fs.writeFileSync(opts.outputdir + '/index.html', $.html(), 'utf8');
+$('#impress .step').last().after('<div id="overview" class="step"></div>').next().attr({
+  'data-x': (maxX - argv.w) / 2,
+  'data-y': (maxY - argv.h) / 2,
+  'data-scale': 4
+});
+
+fs.writeFileSync(argv.o + '/index.html', $.html(), 'utf8');
 
 console.log('ok');
