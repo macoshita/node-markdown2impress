@@ -21,27 +21,45 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 30px 0;
+}
+
+.center {
+  text-align: center;
+}
+
+.step {
+  background-color: white;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  opacity: 0.8;
+
+  width: 900px;
+  padding: 30px 50px;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  -ms-box-sizing:     border-box;
+  -o-box-sizing:      border-box;
+  box-sizing:         border-box;
+
+  font-family: 'PT Serif', georgia, serif;
+
+  font-size: 48px;
+  line-height: 1.5;
+}
+
+#title h1 {
+  font-size: 150px;
+}
+
 /* enable clicking on elements 'hiding' behind body in 3D */
 body     { pointer-events: none; }
 #impress { pointer-events: auto; }
 
 /* COMMON STEP STYLES */
-
-.step {
-    width: 900px;
-    padding: 40px;
-
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing:    border-box;
-    -ms-box-sizing:     border-box;
-    -o-box-sizing:      border-box;
-    box-sizing:         border-box;
-
-    font-family: 'PT Serif', georgia, serif;
-
-    font-size: 48px;
-    line-height: 1.5;
-}
 
 .step {
     -webkit-transition: opacity 1s;
@@ -107,37 +125,6 @@ body     { pointer-events: none; }
 }
 
 /* impress.js title */
-
-#title {
-    padding: 0;
-}
-
-#title .try {
-    font-size: 64px;
-    position: absolute;
-    top: -0.5em;
-    left: 1.5em;
-    
-    -webkit-transform: translateZ(20px);
-    -moz-transform:    translateZ(20px);
-    -ms-transform:     translateZ(20px);
-    -o-transform:      translateZ(20px);
-    transform:         translateZ(20px);
-}
-
-#title h1 {
-    font-size: 190px;
-    
-    -webkit-transform: translateZ(50px);
-    -moz-transform:    translateZ(50px);
-    -ms-transform:     translateZ(50px);
-    -o-transform:      translateZ(50px);
-    transform:         translateZ(50px);
-}
-
-#title .footnote {
-    font-size: 32px;
-}
 
 /* big thoughts */
 
